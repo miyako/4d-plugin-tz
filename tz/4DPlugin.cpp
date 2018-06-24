@@ -32,15 +32,86 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 {
 	switch(pProcNum)
 	{
+		case kInitPlugin :
+		case kServerInitPlugin :
+			OnStartup();
+			break;
+			
 // --- TZ
 
 		case 1 :
 			TZ_Convert(pResult, pParams);
 			break;
+
+		case 2:
+			TZ_Get_zones(pResult, pParams);
+			break;
 	}
 }
 
 // -------------------------------------- TZ --------------------------------------
+
+void OnStartup()
+{
+#if VERSIONMAC
+#define THIS_BUNDLE_ID @"com.4D.tz"
+	NSBundle *thisBundle = [NSBundle bundleWithIdentifier : THIS_BUNDLE_ID];
+	if (thisBundle)
+	{
+		NSString *resourcePath = [thisBundle resourcePath];
+		if (resourcePath)
+		{
+			NSString *installPath = [resourcePath stringByAppendingPathComponent : @"tzdata"];
+			std::string path = [installPath UTF8String];
+
+			using namespace date;
+			set_install(path);
+		}
+	}
+#else
+#define THIS_BUNDLE_NAME L"TZ.4DX"
+#define LIBTZ_OPEN_UTF8 0
+#if LIBTZ_OPEN_UTF8
+#define OPEN_CP CP_UTF8
+#else
+#define OPEN_CP CP_ACP
+#endif
+	wchar_t	fDrive[_MAX_DRIVE], fDir[_MAX_DIR], fName[_MAX_FNAME], fExt[_MAX_EXT];
+	wchar_t thisPath[_MAX_PATH] = { 0 };
+	HMODULE hplugin = GetModuleHandleW(THIS_BUNDLE_NAME);
+
+	if (hplugin)
+	{
+		using namespace std;
+		GetModuleFileNameW(hplugin, thisPath, _MAX_PATH);
+		_wsplitpath_s(thisPath, fDrive, fDir, fName, fExt);
+		wstring windowsPath = fDrive;
+		windowsPath += fDir;
+		//remove delimiter to go one level up the hierarchy
+		if (windowsPath.at(windowsPath.size() - 1) == L'\\')
+			windowsPath = windowsPath.substr(0, windowsPath.size() - 1);
+
+		_wsplitpath_s(windowsPath.c_str(), fDrive, fDir, fName, fExt);
+		wstring resourcesPath = fDrive;
+		resourcesPath += fDir;
+		resourcesPath += L"Resources\\tzdata\\";
+
+		//is it really utf-8?
+		int len = WideCharToMultiByte(OPEN_CP, 0, (LPCWSTR)resourcesPath.c_str(), resourcesPath.length(), NULL, 0, NULL, NULL);
+
+		if (len) {
+			std::vector<uint8_t> buf(len + 1);
+			if (WideCharToMultiByte(OPEN_CP, 0, (LPCWSTR)resourcesPath.c_str(), resourcesPath.length(), (LPSTR)&buf[0], len, NULL, NULL))
+			{
+				string path = string((const char *)&buf[0]);
+				using namespace date;
+				set_install(path);
+			}
+		}
+
+	}
+#endif
+}
 
 void get_zone_names(C_TEXT &names)
 {

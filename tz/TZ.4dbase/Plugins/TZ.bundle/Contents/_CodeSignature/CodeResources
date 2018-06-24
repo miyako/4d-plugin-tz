@@ -90,7 +90,7 @@
 		</data>
 		<key>Resources/Documentation/index.html</key>
 		<data>
-		Er01GBQDPmffwHakZGpzw0yj/to=
+		pDEcBdDJ0gRVxx1dKmvSAkiuTiw=
 		</data>
 		<key>Resources/Documentation/styles/common.css</key>
 		<data>
@@ -105,13 +105,149 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/LICENSE.txt</key>
+		<key>Resources/LICENSE</key>
 		<data>
 		yme+mbhtUuNTJmcIEPe4AkKlMNE=
 		</data>
 		<key>Resources/constants.xlf</key>
 		<data>
 		UbZYnK1QdI2HA5cO0/aNT2a+ucQ=
+		</data>
+		<key>Resources/tzdata/CONTRIBUTING</key>
+		<data>
+		hIEulQZ4sAoBiEcWEGyV9ZlXbEs=
+		</data>
+		<key>Resources/tzdata/LICENSE</key>
+		<data>
+		cGemHT9NrkOGNqiynkGUj8yxaiY=
+		</data>
+		<key>Resources/tzdata/Makefile</key>
+		<data>
+		iyotc0H62Z5W3fSk39ST9PA9IwU=
+		</data>
+		<key>Resources/tzdata/NEWS</key>
+		<data>
+		D/7jlUMqdXP0sn+Kambf1qlU6KA=
+		</data>
+		<key>Resources/tzdata/README</key>
+		<data>
+		BP4Amol9So0yPyVAbsTaoz04V2g=
+		</data>
+		<key>Resources/tzdata/africa</key>
+		<data>
+		jQ+VQsjB7IxplHYgGYlTf9+pi2g=
+		</data>
+		<key>Resources/tzdata/antarctica</key>
+		<data>
+		b9XuY+aurpqbATUuLlzQZS5+3GQ=
+		</data>
+		<key>Resources/tzdata/asia</key>
+		<data>
+		RNz2ruBrpT14WwqUdALrmCKwDuA=
+		</data>
+		<key>Resources/tzdata/australasia</key>
+		<data>
+		G4XB3BWhwcDtKCF265HaOJtLazs=
+		</data>
+		<key>Resources/tzdata/backward</key>
+		<data>
+		fcxQB1unnFkVoNcthEkxjLVMIsg=
+		</data>
+		<key>Resources/tzdata/backzone</key>
+		<data>
+		Hx36gToMXorsB5rh/4NR3at7Lu0=
+		</data>
+		<key>Resources/tzdata/calendars</key>
+		<data>
+		d3Ur35Ygs6x9ZVDK4WZtALtvGq4=
+		</data>
+		<key>Resources/tzdata/checklinks.awk</key>
+		<data>
+		6bBDKFnKzVZ+aG9lbK+0qSrKXSk=
+		</data>
+		<key>Resources/tzdata/checktab.awk</key>
+		<data>
+		ujKQR6eLhCPRJLZBPN9Q0BFKBDM=
+		</data>
+		<key>Resources/tzdata/etcetera</key>
+		<data>
+		PC02KUwRKCwJEbXBmexvxlsS/CA=
+		</data>
+		<key>Resources/tzdata/europe</key>
+		<data>
+		llWE8v7wV8wdJ3cRyZt96EUgU5o=
+		</data>
+		<key>Resources/tzdata/factory</key>
+		<data>
+		0FcRWAtv0/AsoOQsoGSGWvDaIP4=
+		</data>
+		<key>Resources/tzdata/iso3166.tab</key>
+		<data>
+		XvikgL7yKtVDuMSWWWmpSGAi+Ac=
+		</data>
+		<key>Resources/tzdata/leap-seconds.list</key>
+		<data>
+		L+EAmsF8IUc6suc8PYC93T+MIN4=
+		</data>
+		<key>Resources/tzdata/leapseconds</key>
+		<data>
+		SoISKpXxXaSjNiZaYHGW7VZhG1I=
+		</data>
+		<key>Resources/tzdata/leapseconds.awk</key>
+		<data>
+		/B2NNm8AYeoNPthBZWf2CI8Fu/8=
+		</data>
+		<key>Resources/tzdata/northamerica</key>
+		<data>
+		fXcHig+Vd7RoVKOXkPeTxiRSEJA=
+		</data>
+		<key>Resources/tzdata/pacificnew</key>
+		<data>
+		lOmrPpWFnuh/YB+9s7kK1T/50to=
+		</data>
+		<key>Resources/tzdata/southamerica</key>
+		<data>
+		1Wtxkpzva1xyoiRoDm0y9n8xqo0=
+		</data>
+		<key>Resources/tzdata/systemv</key>
+		<data>
+		WUacLcZOhUGLPkzkZLrhapY0jgk=
+		</data>
+		<key>Resources/tzdata/theory.html</key>
+		<data>
+		k6HNEtqoWmveICcZAXl4cGlF5as=
+		</data>
+		<key>Resources/tzdata/version</key>
+		<data>
+		b2KSlrUaUo4BMoyxt7lwDouNMFY=
+		</data>
+		<key>Resources/tzdata/windowsZones.xml</key>
+		<data>
+		b6NNECeyJLzHVt9rKY71O1qpff8=
+		</data>
+		<key>Resources/tzdata/yearistype.sh</key>
+		<data>
+		zT7SN3EOQT6jiLlz1/6eZm/9dXw=
+		</data>
+		<key>Resources/tzdata/ziguard.awk</key>
+		<data>
+		Vi6QVNtoHexMur4NGiebq3cj3II=
+		</data>
+		<key>Resources/tzdata/zishrink.awk</key>
+		<data>
+		iHcSTAPhhJ4Vod5slGrYoO8gwkU=
+		</data>
+		<key>Resources/tzdata/zone.tab</key>
+		<data>
+		LSwcvVobAv4IGjJbXYY0Q3eMnj8=
+		</data>
+		<key>Resources/tzdata/zone1970.tab</key>
+		<data>
+		5CWcxKIvvfzhK3dgUFbgJ1Ear3w=
+		</data>
+		<key>Resources/tzdata/zoneinfo2tdf.pl</key>
+		<data>
+		VvLkftmTUN8yW2LOB60741Ar1aE=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -362,11 +498,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Er01GBQDPmffwHakZGpzw0yj/to=
+			pDEcBdDJ0gRVxx1dKmvSAkiuTiw=
 			</data>
 			<key>hash2</key>
 			<data>
-			pUayjaS+64ZwaA0PaXCdvHwfsaT5D3uXMKuEeRjI9fw=
+			s6LaQ0nn/uwQNmXZL5NGSq+UpnItLgvnu4/KI9MMQs0=
 			</data>
 		</dict>
 		<key>Resources/Documentation/styles/common.css</key>
@@ -393,7 +529,7 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>Resources/LICENSE.txt</key>
+		<key>Resources/LICENSE</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -415,33 +551,407 @@
 			7t2nF9u/4W05GOd8UQ7QAt/PFge16k3ydWYX/6ElmJk=
 			</data>
 		</dict>
+		<key>Resources/tzdata/CONTRIBUTING</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			hIEulQZ4sAoBiEcWEGyV9ZlXbEs=
+			</data>
+			<key>hash2</key>
+			<data>
+			MHLKTQC3i2bjm34wK20uGsQt3/OkOaBTLnCeOjN4vGM=
+			</data>
+		</dict>
+		<key>Resources/tzdata/LICENSE</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cGemHT9NrkOGNqiynkGUj8yxaiY=
+			</data>
+			<key>hash2</key>
+			<data>
+			BhNAhWiIn1c55a4lK3IqJlnAIAKDmtlwpj3F6RdLJ88=
+			</data>
+		</dict>
+		<key>Resources/tzdata/Makefile</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iyotc0H62Z5W3fSk39ST9PA9IwU=
+			</data>
+			<key>hash2</key>
+			<data>
+			IzDmPLffym6ZN6iVNYVirU+pbAMW3+0j9p3SaG9fg1w=
+			</data>
+		</dict>
+		<key>Resources/tzdata/NEWS</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			D/7jlUMqdXP0sn+Kambf1qlU6KA=
+			</data>
+			<key>hash2</key>
+			<data>
+			626Rtn482T3DRw/PZbGq1UC+7sAk2GBInn/Kqb1gr8M=
+			</data>
+		</dict>
+		<key>Resources/tzdata/README</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			BP4Amol9So0yPyVAbsTaoz04V2g=
+			</data>
+			<key>hash2</key>
+			<data>
+			7E+qmDEhuw24YcDJfi8vrEPk6QEbLExEivjcjCHQgi0=
+			</data>
+		</dict>
+		<key>Resources/tzdata/africa</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			jQ+VQsjB7IxplHYgGYlTf9+pi2g=
+			</data>
+			<key>hash2</key>
+			<data>
+			dQe6KRiHol5tveQhFbh6DfhT5d4UfYi92YhTx8oxmT8=
+			</data>
+		</dict>
+		<key>Resources/tzdata/antarctica</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b9XuY+aurpqbATUuLlzQZS5+3GQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			TuRgnSUL/Aw6Gov5ly0fVt3bYDm7Bm+gFvCRTlREmFg=
+			</data>
+		</dict>
+		<key>Resources/tzdata/asia</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			RNz2ruBrpT14WwqUdALrmCKwDuA=
+			</data>
+			<key>hash2</key>
+			<data>
+			zKCnHd0QViHYRtge4rYgHC7CpWbPbZyzdTGs5oHSebU=
+			</data>
+		</dict>
+		<key>Resources/tzdata/australasia</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			G4XB3BWhwcDtKCF265HaOJtLazs=
+			</data>
+			<key>hash2</key>
+			<data>
+			cquayTvJmrDXiD4yPq+Mazw5PrnF44a2BgCpZW7Dses=
+			</data>
+		</dict>
+		<key>Resources/tzdata/backward</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fcxQB1unnFkVoNcthEkxjLVMIsg=
+			</data>
+			<key>hash2</key>
+			<data>
+			+zmsS06z+5JB6W1o5CHUF2dIIuFCfSzil+mvx5CHCS0=
+			</data>
+		</dict>
+		<key>Resources/tzdata/backzone</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Hx36gToMXorsB5rh/4NR3at7Lu0=
+			</data>
+			<key>hash2</key>
+			<data>
+			smmroRT2l5lyB9EAJXy/45YfkB17I4CH2dYioxcJ2NE=
+			</data>
+		</dict>
+		<key>Resources/tzdata/calendars</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			d3Ur35Ygs6x9ZVDK4WZtALtvGq4=
+			</data>
+			<key>hash2</key>
+			<data>
+			U+Vk2pLHySay3CEHqmbd2YAziKFFHuod4AY7G8Fgqxk=
+			</data>
+		</dict>
+		<key>Resources/tzdata/checklinks.awk</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			6bBDKFnKzVZ+aG9lbK+0qSrKXSk=
+			</data>
+			<key>hash2</key>
+			<data>
+			xnz8l/XnfQizp1VspJTye6HZp2mQ8UYPoKeXByXNgu8=
+			</data>
+		</dict>
+		<key>Resources/tzdata/checktab.awk</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ujKQR6eLhCPRJLZBPN9Q0BFKBDM=
+			</data>
+			<key>hash2</key>
+			<data>
+			3R5U9OKVAImoROBF2lBlktHMlRbD4GoQqLWaN6pfFGg=
+			</data>
+		</dict>
+		<key>Resources/tzdata/etcetera</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			PC02KUwRKCwJEbXBmexvxlsS/CA=
+			</data>
+			<key>hash2</key>
+			<data>
+			Bkxctdl93uAgmZtIzNrnwAkIylc6+mk83wJhf0WSS6k=
+			</data>
+		</dict>
+		<key>Resources/tzdata/europe</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			llWE8v7wV8wdJ3cRyZt96EUgU5o=
+			</data>
+			<key>hash2</key>
+			<data>
+			4dos+/3Pgqo7RXclZJ7RMv/Pc2TdIjCAqZpATLBDBUw=
+			</data>
+		</dict>
+		<key>Resources/tzdata/factory</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0FcRWAtv0/AsoOQsoGSGWvDaIP4=
+			</data>
+			<key>hash2</key>
+			<data>
+			lVduWNNXLCyOYyBI5Zt8ZbITtNyXV7MH6M1OuhrmJJk=
+			</data>
+		</dict>
+		<key>Resources/tzdata/iso3166.tab</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			XvikgL7yKtVDuMSWWWmpSGAi+Ac=
+			</data>
+			<key>hash2</key>
+			<data>
+			/ovReSwOfsa0JQfFijukM+vdrb9MMDHqym2pxB3vN9I=
+			</data>
+		</dict>
+		<key>Resources/tzdata/leap-seconds.list</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			L+EAmsF8IUc6suc8PYC93T+MIN4=
+			</data>
+			<key>hash2</key>
+			<data>
+			YlXOdC+BiThMGNzrkuz3Y51JxIDE3IPHcOlabzu97xw=
+			</data>
+		</dict>
+		<key>Resources/tzdata/leapseconds</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			SoISKpXxXaSjNiZaYHGW7VZhG1I=
+			</data>
+			<key>hash2</key>
+			<data>
+			/UTC3ZyD4sru4wvZDMAfpTjmvCbbdW4W14aSxDcLAgU=
+			</data>
+		</dict>
+		<key>Resources/tzdata/leapseconds.awk</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/B2NNm8AYeoNPthBZWf2CI8Fu/8=
+			</data>
+			<key>hash2</key>
+			<data>
+			0JCxTcqJ6fhv0+YVDzOyHNRR23Qe+YqhTc8Go8ELofo=
+			</data>
+		</dict>
+		<key>Resources/tzdata/northamerica</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fXcHig+Vd7RoVKOXkPeTxiRSEJA=
+			</data>
+			<key>hash2</key>
+			<data>
+			zvEw1/tUb5ops8VpwgX06RKTtID1OrAQH1s4QMBtft4=
+			</data>
+		</dict>
+		<key>Resources/tzdata/pacificnew</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			lOmrPpWFnuh/YB+9s7kK1T/50to=
+			</data>
+			<key>hash2</key>
+			<data>
+			YkqTKt9NiYP1ZPykuIAoyBm/yMUuJPtvbZ4fh83PSGc=
+			</data>
+		</dict>
+		<key>Resources/tzdata/southamerica</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1Wtxkpzva1xyoiRoDm0y9n8xqo0=
+			</data>
+			<key>hash2</key>
+			<data>
+			vEvSXwXKhyOtAVkWMbh7X57K42jEaM/q9w3YhjScXJA=
+			</data>
+		</dict>
+		<key>Resources/tzdata/systemv</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WUacLcZOhUGLPkzkZLrhapY0jgk=
+			</data>
+			<key>hash2</key>
+			<data>
+			Oypkk9blWU7/aRxvQlKyiMrIog5vTvl+CjgBWIu+JzE=
+			</data>
+		</dict>
+		<key>Resources/tzdata/theory.html</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			k6HNEtqoWmveICcZAXl4cGlF5as=
+			</data>
+			<key>hash2</key>
+			<data>
+			gl++9Ytbdxpr4sBSjr3Xt5q9mnIq/MEK4TOEkEqRsSY=
+			</data>
+		</dict>
+		<key>Resources/tzdata/version</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b2KSlrUaUo4BMoyxt7lwDouNMFY=
+			</data>
+			<key>hash2</key>
+			<data>
+			FE0g9MM1ooluSFTtB8mTM/koNzM0lU9ZNphXjWl0Nww=
+			</data>
+		</dict>
+		<key>Resources/tzdata/windowsZones.xml</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b6NNECeyJLzHVt9rKY71O1qpff8=
+			</data>
+			<key>hash2</key>
+			<data>
+			SAbD4TyuF3tOfEAnsDVjokqYL7IzXCRgbii6XY8PGo8=
+			</data>
+		</dict>
+		<key>Resources/tzdata/yearistype.sh</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zT7SN3EOQT6jiLlz1/6eZm/9dXw=
+			</data>
+			<key>hash2</key>
+			<data>
+			uh3cYefpAnEKmOl5tgORiNVvLKWF3iXLQTEvKz8Lmz4=
+			</data>
+		</dict>
+		<key>Resources/tzdata/ziguard.awk</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Vi6QVNtoHexMur4NGiebq3cj3II=
+			</data>
+			<key>hash2</key>
+			<data>
+			X8R0+chJCV97ea6LHV+SyyfVljgjX4vepoToS1ZBf0c=
+			</data>
+		</dict>
+		<key>Resources/tzdata/zishrink.awk</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iHcSTAPhhJ4Vod5slGrYoO8gwkU=
+			</data>
+			<key>hash2</key>
+			<data>
+			5CrovIXrgpupA/ZrV3fXOV0kYVNTU0Ty8A+++OMbYcI=
+			</data>
+		</dict>
+		<key>Resources/tzdata/zone.tab</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LSwcvVobAv4IGjJbXYY0Q3eMnj8=
+			</data>
+			<key>hash2</key>
+			<data>
+			FM37LF4/cgHYLDaNOsIEo8+55Q2J3RBtQU4wLbV8FB4=
+			</data>
+		</dict>
+		<key>Resources/tzdata/zone1970.tab</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5CWcxKIvvfzhK3dgUFbgJ1Ear3w=
+			</data>
+			<key>hash2</key>
+			<data>
+			MSS5l7kYP3ApWFaQrjyzGv4eJxpLvb8F7wAtI9A3YLI=
+			</data>
+		</dict>
+		<key>Resources/tzdata/zoneinfo2tdf.pl</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			VvLkftmTUN8yW2LOB60741Ar1aE=
+			</data>
+			<key>hash2</key>
+			<data>
+			zHo9YJnjHPbJCNqgL2wAQPkErV5KjEqZrn7OPViHMWk=
+			</data>
+		</dict>
 		<key>Windows/TZ.4DX</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			8WH79l2tgViHfCYSUBu+HCIQ5Es=
+			X9eVGbuJgV19Z/hmTDK4J9WB8UE=
 			</data>
 			<key>hash2</key>
 			<data>
-			rp5mwPoToTOMBrO5g9ATVRBDkkR1XpJE6MF06FX5mo0=
+			meTzHbFav+qfwCheCK4UAPRAEFmylss/NBT9sAFzFcw=
 			</data>
 		</dict>
 		<key>Windows64/TZ.4DX</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			r1aAHLsl1HqPOxOjnnlVMBT8weQ=
+			H1E2gD3Pia3Z+opjfD5iBXezpSA=
 			</data>
 			<key>hash2</key>
 			<data>
-			D81BlAXC8IYBjKsGDu0nx8Zm3OxlDG6/r2pFvj/FY7A=
+			ZsMsUdmH+Hkcr/6gwn1ViBnnqYqfaWCA8dPIXOsIZf8=
 			</data>
 		</dict>
 		<key>manifest.json</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			DQb+GuLh6Pg64JZVHqnT1Hv803E=
+			nVxj1gMrSxOzLyTW3Fw3dhZ1co0=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>

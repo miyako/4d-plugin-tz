@@ -6,6 +6,11 @@
 							 "theme": "TZ",
 							 "syntax": "TZ Convert(&T;&T;&T;&T;&L):T",
 							 "threadSafe": true
+							 },
+							 {
+							 "theme": "TZ",
+							 "syntax": "TZ Get zones:T",
+							 "threadSafe": true
 							 }
 							 ]
 }
