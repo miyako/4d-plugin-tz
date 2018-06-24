@@ -15,4 +15,3 @@
 
 // --- TZ
 void TZ_Convert(sLONG_PTR *pResult, PackagePtr pParams);
-void TZ_Get_zones(sLONG_PTR *pResult, PackagePtr pParams);

@@ -37,11 +37,6 @@ void CommandDispatcher (PA_long32 pProcNum, sLONG_PTR *pResult, PackagePtr pPara
 		case 1 :
 			TZ_Convert(pResult, pParams);
 			break;
-			
-		case 2 :
-			TZ_Get_zones(pResult, pParams);
-			break;
-			
 	}
 }
 
@@ -107,6 +102,8 @@ void get_zone_names(C_TEXT &names)
 	json_stringify(n, names);
 	json_delete(n);
 }
+
+/* deactivated (curl dependency) */
 
 void parse_date(C_TEXT &date_in,
 								C_TEXT &format_in,
