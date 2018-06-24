@@ -441,7 +441,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			0tuFEQBpd6he/fknwcRdh+q3r74=
+			nVxj1gMrSxOzLyTW3Fw3dhZ1co0=
 			</data>
 			<key>requirement</key>
 			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
