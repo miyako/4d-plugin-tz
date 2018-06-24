@@ -15,7 +15,7 @@ based on [Time Zone Database Parser](https://howardhinnant.github.io/date/tz.htm
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
-**Note**: The [timezone database](http://www.iana.org/time-zones) and [windowsZones.xml](http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml) is preinstalled locally in ``Resources/tzdata``.
+**Note**: The [timezone database](http://www.iana.org/time-zones) and [windowsZones.xml](http://unicode.org/repos/cldr/trunk/common/supplemental/windowsZones.xml) are preinstalled locally in ``Resources/tzdata``.
 
 ## Syntax
 
