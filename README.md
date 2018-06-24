@@ -7,7 +7,7 @@ based on [Time Zone Database Parser](https://howardhinnant.github.io/date/tz.htm
 
 | carbon | cocoa | win32 | win64 |
 |:------:|:-----:|:---------:|:---------:|
-|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|||
+|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|<img src="https://cloud.githubusercontent.com/assets/1725068/22371562/1b091f0a-e4db-11e6-8458-8653954a7cce.png" width="24" height="24" />|
 
 ### Version
 
@@ -29,34 +29,7 @@ zone_out|TEXT|
 fmt_out|TEXT|``strftime``
 offset|LONGINT|seconds
 
-```
-zones:=TZ Get zones 
-```
-
-Parameter|Type|Description
-------------|------------|----
-zones|TEXT|``json``
-
 ### Examples
-
-```
-$zones:=TZ Get zones 
-$z:=JSON Parse($zones)
-
-  //array object
-
-  //(example of an item)
-
-  //abbrev:EDT
-  //begin:2018-03-11 07:00:00
-  //end:2018-11-04 06:00:00
-  //local_time:2018-06-24 02:24:04.340
-  //name:America/Kentucky/Louisville
-  //offset:-14400
-  //offset_time:-04:00:00
-  //save:60
-  //save_time:01:00:00
-```
 
 ```
   //RFC to ISO conversion (specify format only)
