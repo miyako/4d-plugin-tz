@@ -17,6 +17,15 @@ based on [Time Zone Database Parser](https://howardhinnant.github.io/date/tz.htm
 
 ## Syntax
 
+
+```
+zones:=TZ Get zones
+```
+
+Parameter|Type|Description
+------------|------------|----
+zones|TEXT|``json``
+
 ```
 result:=TZ Convert (time;fmt_in;zone_out;fmt_out)
 ```
