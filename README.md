@@ -1,6 +1,8 @@
 # 4d-plugin-tz
 Perform conversion and arithmetic on dates
 
+based on [Time Zone Database Parser](https://howardhinnant.github.io/date/tz.html)
+
 ### Platform
 
 | carbon | cocoa | win32 | win64 |
