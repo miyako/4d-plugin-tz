@@ -3,6 +3,8 @@ Perform conversion and arithmetic on dates
 
 based on [Time Zone Database Parser](https://howardhinnant.github.io/date/tz.html)
 
+similar project: [time-and-number](https://github.com/miyako/4d-plugin-time-and-number)
+
 ### Platform
 
 | carbon | cocoa | win32 | win64 |
