@@ -62,9 +62,20 @@ jobs:
       # GitHub-hosted windows-latest ships VS2022 (v143 toolset) but not the
       # legacy v140 toolset the project is pinned to, so we override it on
       # the command line rather than requiring an extra VS component install.
+      #
+      # The project also hardcodes WindowsTargetPlatformVersion=8.1 in
+      # TZ.vcxproj (<PropertyGroup Label="Globals">), and the Windows 8.1 SDK
+      # is no longer installed on current windows-latest images, which fails
+      # with MSB8036 ("The Windows SDK version 8.1 was not found"). Same class
+      # of fix as the toolset override above: override it on the command line
+      # rather than editing the vcxproj (which applies to all 4
+      # Debug/Release x Win32/x64 configurations, not just the one this job
+      # builds). "10.0" lets MSBuild resolve to whatever full 10.0.xxxxx.x SDK
+      # is actually installed on the runner, rather than pinning an exact
+      # build number that may not match the image.
       - name: build x64
         shell: cmd
-        run: msbuild "${{ env.VCX_SOLUTION }}" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /m
+        run: msbuild "${{ env.VCX_SOLUTION }}" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /m
 
       - name: upload windows binaries
         uses: actions/upload-artifact@v4
