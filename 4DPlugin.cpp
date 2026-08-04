@@ -10,6 +10,28 @@
 
 
 #include "4DPluginAPI.h"
+
+// 4DPluginAPI.h defines "#define getpid GetCurrentProcessId" as a BSD/POSIX
+// compatibility shim (alongside close->closesocket, TickCount->GetTickCount)
+// and never undefines it. getpid() is never actually called anywhere in this
+// project, so the macro serves no purpose here - but it stays active for the
+// rest of the translation unit. date/tz.h, libjson.h, and <iostream> (pulled
+// in by 4DPlugin.h below) transitively include the UCRT's own <process.h>,
+// which (at least as of Windows SDK 10.0.26100.0) declares its own getpid().
+// The preprocessor rewrites that declaration's name to GetCurrentProcessId
+// too, producing a return-type conflict against the real WinAPI
+// GetCurrentProcessId (int vs DWORD) - MSVC errors C2556/C2371 in process.h.
+// Undefining it here, immediately after the only header that needs it and
+// before anything that can trigger <process.h>, avoids editing the shared
+// SDK header (4DPluginAPI.h is common boilerplate across 4D plugins, not
+// something specific to this project) while fully avoiding the collision.
+// The sibling macros (close, TickCount) are the same class of landmine and
+// aren't currently triggering an error, but are worth the same treatment if
+// a future SDK update exposes a conflicting declaration for either.
+#ifdef getpid
+#undef getpid
+#endif
+
 #include "4DPlugin.h"
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params)
