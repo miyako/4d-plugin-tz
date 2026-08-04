@@ -15,24 +15,36 @@
 // compatibility shim (alongside close->closesocket, TickCount->GetTickCount)
 // and never undefines it. getpid() is never actually called anywhere in this
 // project, so the macro serves no purpose here - but it stays active for the
-// rest of the translation unit. date/tz.h, libjson.h, and <iostream> (pulled
-// in by 4DPlugin.h below) transitively include the UCRT's own <process.h>,
-// which (at least as of Windows SDK 10.0.26100.0) declares its own getpid().
-// The preprocessor rewrites that declaration's name to GetCurrentProcessId
-// too, producing a return-type conflict against the real WinAPI
-// GetCurrentProcessId (int vs DWORD) - MSVC errors C2556/C2371 in process.h.
-// Undefining it here, immediately after the only header that needs it and
-// before anything that can trigger <process.h>, avoids editing the shared
-// SDK header (4DPluginAPI.h is common boilerplate across 4D plugins, not
-// something specific to this project) while fully avoiding the collision.
-// The sibling macros (close, TickCount) are the same class of landmine and
-// aren't currently triggering an error, but are worth the same treatment if
-// a future SDK update exposes a conflicting declaration for either.
+// rest of the translation unit. date/tz.h, jsoncpp's headers, and <iostream>
+// (pulled in by 4DPlugin.h below) transitively include the UCRT's own
+// <process.h>, which (at least as of Windows SDK 10.0.26100.0) declares its
+// own getpid(). The preprocessor rewrites that declaration's name to
+// GetCurrentProcessId too, producing a return-type conflict against the real
+// WinAPI GetCurrentProcessId (int vs DWORD) - MSVC errors C2556/C2371 in
+// process.h. Undefining it here, immediately after the only header that
+// needs it and before anything that can trigger <process.h>, avoids editing
+// the shared SDK header (4DPluginAPI.h is common boilerplate across 4D
+// plugins, not something specific to this project) while fully avoiding the
+// collision. The sibling macros (close, TickCount) are the same class of
+// landmine and aren't currently triggering an error, but are worth the same
+// treatment if a future SDK update exposes a conflicting declaration for
+// either.
 #ifdef getpid
 #undef getpid
 #endif
 
 #include "4DPlugin.h"
+
+// jsoncpp replaces libjson here. jsoncpp's Json::Value is a plain C++ value
+// type (stack-allocated, no json_new/json_delete bookkeeping) and its
+// strings are UTF-8 std::string, so the wide-char round-tripping that
+// libjson_methods.cpp did for libjson's JSON_UNICODE (wchar_t-based
+// json_char) build is no longer needed for this JSON-producing path: 4D's
+// C_TEXT can be filled directly from the UTF-8 std::string that jsoncpp's
+// writer produces. Adjust this include path to wherever json.h (and its
+// sibling value.h/writer.h/etc.) live in the build - e.g. "json/json.h" if
+// they're vendored under an include/json/ directory.
+#include "json/json.h"
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params)
 {
@@ -143,53 +155,66 @@ void get_zone_names(C_TEXT &names)
 	
 	auto now = floor<milliseconds>(system_clock::now());
 	
-	JSONNODE *n = json_new(JSON_ARRAY);
+	// libjson's JSONNODE* tree (json_new/json_set_s_for_key/json_push_back,
+	// manually freed with json_delete) is replaced by a plain jsoncpp
+	// Json::Value. Object keys are ordinary UTF-8 string literals rather
+	// than the wide (L"...") json_char keys libjson's JSON_UNICODE build
+	// required.
+	Json::Value root(Json::arrayValue);
 	
 	for(auto i = get_tzdb().zones.begin(); i != get_tzdb().zones.end();++i)
 	{
-		JSONNODE *tz = json_new(JSON_NODE);
+		Json::Value tz(Json::objectValue);
+		
 		//name
-		json_set_s_for_key(tz, L"name", i->name().c_str());
+		tz["name"] = i->name();
 		
 		//abbrev
 		sys_info si = i->get_info(now);
 		string abbrev = si.abbrev;
-		json_set_s_for_key(tz, L"abbrev", abbrev.c_str());
+		tz["abbrev"] = abbrev;
 		
 		//to_local
 		ostringstream local;
 		local << i->to_local(now);
-		json_set_s_for_key(tz, L"local_time", local.str().c_str());
+		tz["local_time"] = local.str();
 		
 		//offset
 		ostringstream offset_t;
 		offset_t << format("%T", si.offset);
-		json_set_s_for_key(tz, L"offset_time", offset_t.str().c_str());
+		tz["offset_time"] = offset_t.str();
 		
-		json_set_i_for_key(tz, L"offset", (int)si.offset.count());
+		tz["offset"] = (int)si.offset.count();
 		
 		//save
 		ostringstream save_t;
 		save_t << format("%T", si.save);
-		json_set_s_for_key(tz, L"save_time", save_t.str().c_str());
+		tz["save_time"] = save_t.str();
 		
-		json_set_i_for_key(tz, L"save", (int)si.save.count());
+		tz["save"] = (int)si.save.count();
 		
 		//begin
 		ostringstream begin;
 		begin << si.begin;
-		json_set_s_for_key(tz, L"begin", begin.str().c_str());
+		tz["begin"] = begin.str();
 		
 		//end
 		ostringstream end;
 		end << si.end;
-		json_set_s_for_key(tz, L"end", end.str().c_str());
+		tz["end"] = end.str();
 		
-		json_push_back(n, tz);
+		root.append(tz);
 	}
 
-	json_stringify(n, names);
-	json_delete(n);
+	// json_stringify(n, names) -> jsoncpp's StreamWriterBuilder + writeString.
+	// "indentation": "" reproduces json_write()'s compact (non-formatted)
+	// output; use json_write_formatted()'s equivalent by setting a real
+	// indentation string (e.g. "\t") if pretty output is ever wanted here.
+	Json::StreamWriterBuilder writerBuilder;
+	writerBuilder["indentation"] = "";
+	std::string result = Json::writeString(writerBuilder, root);
+	
+	names.setUTF8String((const uint8_t *)result.c_str(), result.length());
 }
 
 /* deactivated (curl dependency) */

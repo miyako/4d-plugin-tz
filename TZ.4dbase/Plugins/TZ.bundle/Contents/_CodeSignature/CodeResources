@@ -113,6 +113,10 @@
 		<data>
 		UbZYnK1QdI2HA5cO0/aNT2a+ucQ=
 		</data>
+		<key>Resources/manifest.json</key>
+		<data>
+		7ICvicTwu9byAXL20K1zJmoip6Y=
+		</data>
 		<key>Resources/tzdata/CONTRIBUTING</key>
 		<data>
 		hIEulQZ4sAoBiEcWEGyV9ZlXbEs=
@@ -254,10 +258,6 @@
 	<dict>
 		<key>QuickLook/Thumbnail.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LgsQFORWUNIL+UFexKFa4CiRctg=
-			</data>
 			<key>hash2</key>
 			<data>
 			98jKbUnZvoNXKS37m5JUoBfuRCxC2JzhKP+uHKV6WFc=
@@ -265,10 +265,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_0.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			tiDJoel4B9Su5Vc6F5vwnss1hxA=
-			</data>
 			<key>hash2</key>
 			<data>
 			9vmEtgmmyGxRDYp2yfSg83yXqFC3Vb94MZzv8eHOKW4=
@@ -276,10 +272,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_1.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Xdham7YBdO9hHz9pu3JwI3RxzwA=
-			</data>
 			<key>hash2</key>
 			<data>
 			TrpzHgo9oH+Dvp8sFNJ41e99Dbacr0g98j8bPNPYXEA=
@@ -287,10 +279,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_10.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LjhDWK6ZACt2A2dwNz3OGcdRm+E=
-			</data>
 			<key>hash2</key>
 			<data>
 			/U/DyOkvYzpGpYhDNFqoFbaGTy++/3AEHoXEj45nSXw=
@@ -298,10 +286,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_11.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			BsQsfCQL7g79/hNSV/3jj2qjaY0=
-			</data>
 			<key>hash2</key>
 			<data>
 			E724wFugux7v75OmnU3bGRO9pJUnaoziooTqnBuV97A=
@@ -309,10 +293,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_12.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			7nj/vKfKe01w+5woEL6pRcUYBpA=
-			</data>
 			<key>hash2</key>
 			<data>
 			KVB9AtEP5sBt+fCXX9qh/rd3ZlcHO/Oa3Xoqu0jbeHQ=
@@ -320,10 +300,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_13.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			pvda6iJvKs8/nhpF0grnjsL72iE=
-			</data>
 			<key>hash2</key>
 			<data>
 			+CZ+t08NJvU7i6wg32Dx2JYOhLPHNXe+Uu8IBsZH08Y=
@@ -331,10 +307,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_2.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			uqCQJfWQl6LHH7yJfK08g098syU=
-			</data>
 			<key>hash2</key>
 			<data>
 			skXN3JxkZamLCu0bZ/kGsrp3B3hk3PKEWTMDXKtEaPM=
@@ -342,10 +314,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_22.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			uqCQJfWQl6LHH7yJfK08g098syU=
-			</data>
 			<key>hash2</key>
 			<data>
 			skXN3JxkZamLCu0bZ/kGsrp3B3hk3PKEWTMDXKtEaPM=
@@ -353,10 +321,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_23.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			EPoeutAMyJUs5fTlv3VLBJE0Kms=
-			</data>
 			<key>hash2</key>
 			<data>
 			2ld5c+3wNHdVnghc5ljivRo17LU+mtZJWepbdZoTcsU=
@@ -364,10 +328,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_24.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LhS49O/YINS4pVd2ddVJtLsM1mI=
-			</data>
 			<key>hash2</key>
 			<data>
 			Q+huqo1QhzGgfhferrSVajYsRwrDT/IZjU22Qc73pTA=
@@ -375,10 +335,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_25.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			2yt8aw96M2XVx+eR0GtlFxJQLoI=
-			</data>
 			<key>hash2</key>
 			<data>
 			1OMbaC2wVHUUU30gXx3U7piJsw8aK8KK+F6KOqbTqpA=
@@ -386,10 +342,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_27.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			GsutoOCbHzyqxv2YpOxYTYxdHow=
-			</data>
 			<key>hash2</key>
 			<data>
 			UKomJLZx3XUsaJXRQFWbJPG0cU2E1tzLwT/68a16lNg=
@@ -397,10 +349,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_29.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			KSUNPiBpUFAlwCWvxW5M50znbQI=
-			</data>
 			<key>hash2</key>
 			<data>
 			vBqYAiuMveNMMmjpJUGwJHiVrvBGg9aGFSwFmmJdM2k=
@@ -408,10 +356,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_3.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			EPoeutAMyJUs5fTlv3VLBJE0Kms=
-			</data>
 			<key>hash2</key>
 			<data>
 			2ld5c+3wNHdVnghc5ljivRo17LU+mtZJWepbdZoTcsU=
@@ -419,10 +363,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_32.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			7nj/vKfKe01w+5woEL6pRcUYBpA=
-			</data>
 			<key>hash2</key>
 			<data>
 			KVB9AtEP5sBt+fCXX9qh/rd3ZlcHO/Oa3Xoqu0jbeHQ=
@@ -430,10 +370,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_4.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LhS49O/YINS4pVd2ddVJtLsM1mI=
-			</data>
 			<key>hash2</key>
 			<data>
 			Q+huqo1QhzGgfhferrSVajYsRwrDT/IZjU22Qc73pTA=
@@ -441,10 +377,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_5.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			2yt8aw96M2XVx+eR0GtlFxJQLoI=
-			</data>
 			<key>hash2</key>
 			<data>
 			1OMbaC2wVHUUU30gXx3U7piJsw8aK8KK+F6KOqbTqpA=
@@ -452,10 +384,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_6.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			ETvgikqdg49Jmk/16DOVlKPgHeg=
-			</data>
 			<key>hash2</key>
 			<data>
 			RxXse1vQJSnMR3dtYS1xLVx8DJGhNdVftEQmPAAOmJk=
@@ -463,10 +391,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_7.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			GsutoOCbHzyqxv2YpOxYTYxdHow=
-			</data>
 			<key>hash2</key>
 			<data>
 			UKomJLZx3XUsaJXRQFWbJPG0cU2E1tzLwT/68a16lNg=
@@ -474,10 +398,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_8.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			6zTgta0+sL00+ZtchNPghmJlQxU=
-			</data>
 			<key>hash2</key>
 			<data>
 			ZpL3Z/DV8nCDAu/2LuVq6vZHobBPSmML1XJeM8jvYLw=
@@ -485,10 +405,6 @@
 		</dict>
 		<key>Resources/Documentation/images/Field_9.png</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			KSUNPiBpUFAlwCWvxW5M50znbQI=
-			</data>
 			<key>hash2</key>
 			<data>
 			vBqYAiuMveNMMmjpJUGwJHiVrvBGg9aGFSwFmmJdM2k=
@@ -496,10 +412,6 @@
 		</dict>
 		<key>Resources/Documentation/index.html</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			pDEcBdDJ0gRVxx1dKmvSAkiuTiw=
-			</data>
 			<key>hash2</key>
 			<data>
 			s6LaQ0nn/uwQNmXZL5NGSq+UpnItLgvnu4/KI9MMQs0=
@@ -507,10 +419,6 @@
 		</dict>
 		<key>Resources/Documentation/styles/common.css</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			q2MkLIqbO3Pku+N1cvLwp03xKCQ=
-			</data>
 			<key>hash2</key>
 			<data>
 			rIVNwBjwCMNfpfCWIZchUp2lc4pKKGBI+/i7Oos1o7Q=
@@ -518,10 +426,6 @@
 		</dict>
 		<key>Resources/English.lproj/InfoPlist.strings</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			qsnPGsJCTFbDlIs2Z54FE4mcmC4=
-			</data>
 			<key>hash2</key>
 			<data>
 			7o3HWwY4ZLnk02OQQNNSrhzlbbyBbObudp55VLVC974=
@@ -531,10 +435,6 @@
 		</dict>
 		<key>Resources/LICENSE</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			yme+mbhtUuNTJmcIEPe4AkKlMNE=
-			</data>
 			<key>hash2</key>
 			<data>
 			yQ9sAPuWEXBWApnL2ijKLUWASROqiyqfNtu44AKNaTA=
@@ -542,21 +442,20 @@
 		</dict>
 		<key>Resources/constants.xlf</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			UbZYnK1QdI2HA5cO0/aNT2a+ucQ=
-			</data>
 			<key>hash2</key>
 			<data>
 			7t2nF9u/4W05GOd8UQ7QAt/PFge16k3ydWYX/6ElmJk=
 			</data>
 		</dict>
+		<key>Resources/manifest.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RtjryFQELE75RDIfcUEj5t3bTsEHlb3vWVIQK0neAY8=
+			</data>
+		</dict>
 		<key>Resources/tzdata/CONTRIBUTING</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			hIEulQZ4sAoBiEcWEGyV9ZlXbEs=
-			</data>
 			<key>hash2</key>
 			<data>
 			MHLKTQC3i2bjm34wK20uGsQt3/OkOaBTLnCeOjN4vGM=
@@ -564,10 +463,6 @@
 		</dict>
 		<key>Resources/tzdata/LICENSE</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			cGemHT9NrkOGNqiynkGUj8yxaiY=
-			</data>
 			<key>hash2</key>
 			<data>
 			BhNAhWiIn1c55a4lK3IqJlnAIAKDmtlwpj3F6RdLJ88=
@@ -575,10 +470,6 @@
 		</dict>
 		<key>Resources/tzdata/Makefile</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			iyotc0H62Z5W3fSk39ST9PA9IwU=
-			</data>
 			<key>hash2</key>
 			<data>
 			IzDmPLffym6ZN6iVNYVirU+pbAMW3+0j9p3SaG9fg1w=
@@ -586,10 +477,6 @@
 		</dict>
 		<key>Resources/tzdata/NEWS</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			D/7jlUMqdXP0sn+Kambf1qlU6KA=
-			</data>
 			<key>hash2</key>
 			<data>
 			626Rtn482T3DRw/PZbGq1UC+7sAk2GBInn/Kqb1gr8M=
@@ -597,10 +484,6 @@
 		</dict>
 		<key>Resources/tzdata/README</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			BP4Amol9So0yPyVAbsTaoz04V2g=
-			</data>
 			<key>hash2</key>
 			<data>
 			7E+qmDEhuw24YcDJfi8vrEPk6QEbLExEivjcjCHQgi0=
@@ -608,10 +491,6 @@
 		</dict>
 		<key>Resources/tzdata/africa</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			jQ+VQsjB7IxplHYgGYlTf9+pi2g=
-			</data>
 			<key>hash2</key>
 			<data>
 			dQe6KRiHol5tveQhFbh6DfhT5d4UfYi92YhTx8oxmT8=
@@ -619,10 +498,6 @@
 		</dict>
 		<key>Resources/tzdata/antarctica</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			b9XuY+aurpqbATUuLlzQZS5+3GQ=
-			</data>
 			<key>hash2</key>
 			<data>
 			TuRgnSUL/Aw6Gov5ly0fVt3bYDm7Bm+gFvCRTlREmFg=
@@ -630,10 +505,6 @@
 		</dict>
 		<key>Resources/tzdata/asia</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			RNz2ruBrpT14WwqUdALrmCKwDuA=
-			</data>
 			<key>hash2</key>
 			<data>
 			zKCnHd0QViHYRtge4rYgHC7CpWbPbZyzdTGs5oHSebU=
@@ -641,10 +512,6 @@
 		</dict>
 		<key>Resources/tzdata/australasia</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			G4XB3BWhwcDtKCF265HaOJtLazs=
-			</data>
 			<key>hash2</key>
 			<data>
 			cquayTvJmrDXiD4yPq+Mazw5PrnF44a2BgCpZW7Dses=
@@ -652,10 +519,6 @@
 		</dict>
 		<key>Resources/tzdata/backward</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			fcxQB1unnFkVoNcthEkxjLVMIsg=
-			</data>
 			<key>hash2</key>
 			<data>
 			+zmsS06z+5JB6W1o5CHUF2dIIuFCfSzil+mvx5CHCS0=
@@ -663,10 +526,6 @@
 		</dict>
 		<key>Resources/tzdata/backzone</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Hx36gToMXorsB5rh/4NR3at7Lu0=
-			</data>
 			<key>hash2</key>
 			<data>
 			smmroRT2l5lyB9EAJXy/45YfkB17I4CH2dYioxcJ2NE=
@@ -674,10 +533,6 @@
 		</dict>
 		<key>Resources/tzdata/calendars</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			d3Ur35Ygs6x9ZVDK4WZtALtvGq4=
-			</data>
 			<key>hash2</key>
 			<data>
 			U+Vk2pLHySay3CEHqmbd2YAziKFFHuod4AY7G8Fgqxk=
@@ -685,10 +540,6 @@
 		</dict>
 		<key>Resources/tzdata/checklinks.awk</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			6bBDKFnKzVZ+aG9lbK+0qSrKXSk=
-			</data>
 			<key>hash2</key>
 			<data>
 			xnz8l/XnfQizp1VspJTye6HZp2mQ8UYPoKeXByXNgu8=
@@ -696,10 +547,6 @@
 		</dict>
 		<key>Resources/tzdata/checktab.awk</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			ujKQR6eLhCPRJLZBPN9Q0BFKBDM=
-			</data>
 			<key>hash2</key>
 			<data>
 			3R5U9OKVAImoROBF2lBlktHMlRbD4GoQqLWaN6pfFGg=
@@ -707,10 +554,6 @@
 		</dict>
 		<key>Resources/tzdata/etcetera</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			PC02KUwRKCwJEbXBmexvxlsS/CA=
-			</data>
 			<key>hash2</key>
 			<data>
 			Bkxctdl93uAgmZtIzNrnwAkIylc6+mk83wJhf0WSS6k=
@@ -718,10 +561,6 @@
 		</dict>
 		<key>Resources/tzdata/europe</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			llWE8v7wV8wdJ3cRyZt96EUgU5o=
-			</data>
 			<key>hash2</key>
 			<data>
 			4dos+/3Pgqo7RXclZJ7RMv/Pc2TdIjCAqZpATLBDBUw=
@@ -729,10 +568,6 @@
 		</dict>
 		<key>Resources/tzdata/factory</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			0FcRWAtv0/AsoOQsoGSGWvDaIP4=
-			</data>
 			<key>hash2</key>
 			<data>
 			lVduWNNXLCyOYyBI5Zt8ZbITtNyXV7MH6M1OuhrmJJk=
@@ -740,10 +575,6 @@
 		</dict>
 		<key>Resources/tzdata/iso3166.tab</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			XvikgL7yKtVDuMSWWWmpSGAi+Ac=
-			</data>
 			<key>hash2</key>
 			<data>
 			/ovReSwOfsa0JQfFijukM+vdrb9MMDHqym2pxB3vN9I=
@@ -751,10 +582,6 @@
 		</dict>
 		<key>Resources/tzdata/leap-seconds.list</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			L+EAmsF8IUc6suc8PYC93T+MIN4=
-			</data>
 			<key>hash2</key>
 			<data>
 			YlXOdC+BiThMGNzrkuz3Y51JxIDE3IPHcOlabzu97xw=
@@ -762,10 +589,6 @@
 		</dict>
 		<key>Resources/tzdata/leapseconds</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			SoISKpXxXaSjNiZaYHGW7VZhG1I=
-			</data>
 			<key>hash2</key>
 			<data>
 			/UTC3ZyD4sru4wvZDMAfpTjmvCbbdW4W14aSxDcLAgU=
@@ -773,10 +596,6 @@
 		</dict>
 		<key>Resources/tzdata/leapseconds.awk</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			/B2NNm8AYeoNPthBZWf2CI8Fu/8=
-			</data>
 			<key>hash2</key>
 			<data>
 			0JCxTcqJ6fhv0+YVDzOyHNRR23Qe+YqhTc8Go8ELofo=
@@ -784,10 +603,6 @@
 		</dict>
 		<key>Resources/tzdata/northamerica</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			fXcHig+Vd7RoVKOXkPeTxiRSEJA=
-			</data>
 			<key>hash2</key>
 			<data>
 			zvEw1/tUb5ops8VpwgX06RKTtID1OrAQH1s4QMBtft4=
@@ -795,10 +610,6 @@
 		</dict>
 		<key>Resources/tzdata/pacificnew</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			lOmrPpWFnuh/YB+9s7kK1T/50to=
-			</data>
 			<key>hash2</key>
 			<data>
 			YkqTKt9NiYP1ZPykuIAoyBm/yMUuJPtvbZ4fh83PSGc=
@@ -806,10 +617,6 @@
 		</dict>
 		<key>Resources/tzdata/southamerica</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			1Wtxkpzva1xyoiRoDm0y9n8xqo0=
-			</data>
 			<key>hash2</key>
 			<data>
 			vEvSXwXKhyOtAVkWMbh7X57K42jEaM/q9w3YhjScXJA=
@@ -817,10 +624,6 @@
 		</dict>
 		<key>Resources/tzdata/systemv</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			WUacLcZOhUGLPkzkZLrhapY0jgk=
-			</data>
 			<key>hash2</key>
 			<data>
 			Oypkk9blWU7/aRxvQlKyiMrIog5vTvl+CjgBWIu+JzE=
@@ -828,10 +631,6 @@
 		</dict>
 		<key>Resources/tzdata/theory.html</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			k6HNEtqoWmveICcZAXl4cGlF5as=
-			</data>
 			<key>hash2</key>
 			<data>
 			gl++9Ytbdxpr4sBSjr3Xt5q9mnIq/MEK4TOEkEqRsSY=
@@ -839,10 +638,6 @@
 		</dict>
 		<key>Resources/tzdata/version</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			b2KSlrUaUo4BMoyxt7lwDouNMFY=
-			</data>
 			<key>hash2</key>
 			<data>
 			FE0g9MM1ooluSFTtB8mTM/koNzM0lU9ZNphXjWl0Nww=
@@ -850,10 +645,6 @@
 		</dict>
 		<key>Resources/tzdata/windowsZones.xml</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			b6NNECeyJLzHVt9rKY71O1qpff8=
-			</data>
 			<key>hash2</key>
 			<data>
 			SAbD4TyuF3tOfEAnsDVjokqYL7IzXCRgbii6XY8PGo8=
@@ -861,10 +652,6 @@
 		</dict>
 		<key>Resources/tzdata/yearistype.sh</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			zT7SN3EOQT6jiLlz1/6eZm/9dXw=
-			</data>
 			<key>hash2</key>
 			<data>
 			uh3cYefpAnEKmOl5tgORiNVvLKWF3iXLQTEvKz8Lmz4=
@@ -872,10 +659,6 @@
 		</dict>
 		<key>Resources/tzdata/ziguard.awk</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			Vi6QVNtoHexMur4NGiebq3cj3II=
-			</data>
 			<key>hash2</key>
 			<data>
 			X8R0+chJCV97ea6LHV+SyyfVljgjX4vepoToS1ZBf0c=
@@ -883,10 +666,6 @@
 		</dict>
 		<key>Resources/tzdata/zishrink.awk</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			iHcSTAPhhJ4Vod5slGrYoO8gwkU=
-			</data>
 			<key>hash2</key>
 			<data>
 			5CrovIXrgpupA/ZrV3fXOV0kYVNTU0Ty8A+++OMbYcI=
@@ -894,10 +673,6 @@
 		</dict>
 		<key>Resources/tzdata/zone.tab</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			LSwcvVobAv4IGjJbXYY0Q3eMnj8=
-			</data>
 			<key>hash2</key>
 			<data>
 			FM37LF4/cgHYLDaNOsIEo8+55Q2J3RBtQU4wLbV8FB4=
@@ -905,10 +680,6 @@
 		</dict>
 		<key>Resources/tzdata/zone1970.tab</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			5CWcxKIvvfzhK3dgUFbgJ1Ear3w=
-			</data>
 			<key>hash2</key>
 			<data>
 			MSS5l7kYP3ApWFaQrjyzGv4eJxpLvb8F7wAtI9A3YLI=
@@ -916,45 +687,17 @@
 		</dict>
 		<key>Resources/tzdata/zoneinfo2tdf.pl</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			VvLkftmTUN8yW2LOB60741Ar1aE=
-			</data>
 			<key>hash2</key>
 			<data>
 			zHo9YJnjHPbJCNqgL2wAQPkErV5KjEqZrn7OPViHMWk=
 			</data>
 		</dict>
-		<key>Windows/TZ.4DX</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			X9eVGbuJgV19Z/hmTDK4J9WB8UE=
-			</data>
-			<key>hash2</key>
-			<data>
-			meTzHbFav+qfwCheCK4UAPRAEFmylss/NBT9sAFzFcw=
-			</data>
-		</dict>
 		<key>Windows64/TZ.4DX</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			H1E2gD3Pia3Z+opjfD5iBXezpSA=
-			</data>
 			<key>hash2</key>
 			<data>
 			ZsMsUdmH+Hkcr/6gwn1ViBnnqYqfaWCA8dPIXOsIZf8=
 			</data>
-		</dict>
-		<key>manifest.json</key>
-		<dict>
-			<key>cdhash</key>
-			<data>
-			nVxj1gMrSxOzLyTW3Fw3dhZ1co0=
-			</data>
-			<key>requirement</key>
-			<string>identifier manifest and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = Y69CWUC25B</string>
 		</dict>
 	</dict>
 	<key>rules</key>
@@ -974,6 +717,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^version.plist$</key>
 		<true/>
@@ -1033,6 +781,11 @@
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
