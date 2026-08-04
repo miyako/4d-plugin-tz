@@ -1,1 +1,6 @@
 build/*
+.vs/*
+Objs/*
+TZ.4dbase/Plugins/TZ.bundle/Contents/Windows64/TZ.exp
+TZ.4dbase/Plugins/TZ.bundle/Contents/Windows64/TZ.lib
+TZ.vcxproj.user
