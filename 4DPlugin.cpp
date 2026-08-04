@@ -144,18 +144,14 @@ void get_zone_names(C_TEXT &names)
 		offset_t << format("%T", si.offset);
 		json_set_s_for_key(tz, L"offset_time", offset_t.str().c_str());
 		
-		ostringstream offset_s;
-		offset_s << si.offset;
-		json_set_i_for_key(tz, L"offset", atoi(offset_s.str().c_str()));
+		json_set_i_for_key(tz, L"offset", (int)si.offset.count());
 		
 		//save
 		ostringstream save_t;
 		save_t << format("%T", si.save);
 		json_set_s_for_key(tz, L"save_time", save_t.str().c_str());
 		
-		ostringstream save_s;
-		save_s << si.save;
-		json_set_i_for_key(tz, L"save", atoi(save_s.str().c_str()));
+		json_set_i_for_key(tz, L"save", (int)si.save.count());
 		
 		//begin
 		ostringstream begin;
@@ -195,9 +191,16 @@ void parse_date(C_TEXT &date_in,
 	//parse date_in using format_in
 	istringstream stream{std::string((const char *)u8.c_str(), u8.length())};
 	format_in.copyUTF8String(&u8);
-	stream >> parse((const char *)u8.c_str(), t);
+	bool parseThrew = false;
+	try{
+		stream >> parse((const char *)u8.c_str(), t);
+	}catch(...){
+		//be defensive: treat a thrown exception the same as a failed parse
+		//rather than letting it propagate out of parse_date
+		parseThrew = true;
+	}
 
-	if(!stream.fail())
+	if(!parseThrew && !stream.fail())
 	{
 		//parse successful
 		t += seconds{time_to_add.getIntValue()};
@@ -232,11 +235,22 @@ void parse_date(C_TEXT &date_in,
 			if(format_out.getUTF16Length())
 			{
 				//format_out specified
-				format_out.copyUTF8String(&u8);
-				result = format((const char *)u8.c_str(), t);
-			}else
+				//format() can throw on a malformed format_out string (e.g. an invalid
+				//%-token) - this was previously unprotected and could escape all the way
+				//to PluginMain's catch(...), which never calls setReturn(), leaving 4D
+				//waiting on a return value that never arrives (a hang, not a crash).
+				try{
+					format_out.copyUTF8String(&u8);
+					result = format((const char *)u8.c_str(), t);
+				}catch(...){
+					//fall back to the unformatted representation below rather than
+					//letting the exception propagate out of parse_date
+				}
+			}
+			
+			if(!result.length())
 			{
-				//format_out not specified
+				//format_out not specified, or format_out threw
 				ostringstream s;
 				s << t;
 				result = s.str();
@@ -263,12 +277,20 @@ void TZ_Convert(sLONG_PTR *pResult, PackagePtr pParams)
 	Param4.fromParamAtIndex(pParams, 4);
 	Param5.fromParamAtIndex(pParams, 5);
 	
-	parse_date(Param1/* date_in */,
-						 Param2/* format_in */,
-						 returnValue/* date_out */,
-						 Param3/* zone_out */,
-						 Param4/* format_out */,
-						 Param5/* time_to_add */);
+	//defense in depth: parse_date is now internally exception-safe, but this
+	//command declares a return type in the manifest ("TZ Convert(...):T"), so
+	//4D will block waiting for setReturn(). Guarantee that call happens on
+	//every path, rather than relying solely on parse_date's own protection.
+	try{
+		parse_date(Param1/* date_in */,
+							 Param2/* format_in */,
+							 returnValue/* date_out */,
+							 Param3/* zone_out */,
+							 Param4/* format_out */,
+							 Param5/* time_to_add */);
+	}catch(...){
+		//leave returnValue empty rather than let the exception escape unanswered
+	}
 	
 	returnValue.setReturn(pResult);
 }
@@ -277,7 +299,14 @@ void TZ_Get_zones(sLONG_PTR *pResult, PackagePtr pParams)
 {
 	C_TEXT returnValue;
 	
-	get_zone_names(returnValue);
+	//"TZ Get zones:T" also declares a return type in the manifest, so guarantee
+	//setReturn() runs even if get_zone_names ever throws (e.g. from a future
+	//tzdb call) rather than depending solely on PluginMain's outer catch(...).
+	try{
+		get_zone_names(returnValue);
+	}catch(...){
+		//leave returnValue empty rather than let the exception escape unanswered
+	}
 	
 	returnValue.setReturn(pResult);
 }
