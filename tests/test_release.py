@@ -9,7 +9,7 @@ import subprocess
 import sys
 from unittest.mock import patch
 
-from helper_support import Fixture, GitFixture, source
+from helper_support import Fixture, GitFixture, HOSTED, HOSTED_FILES, source
 import native
 import release
 import repository
@@ -235,7 +235,10 @@ class PublicationCLIBase(GitFixture):
         for path in self.protected:
             target = self.local / path
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(b"ignored-source.cpp\nbuild/*\n" if path == ".gitignore" else b"protected")
+            target.write_bytes(
+                b"ignored-source.cpp\nbuild/*\nTZ.4dbase/Plugins/XCBuildData/*\n"
+                if path == ".gitignore" else b"protected")
+        self.protected += self.build_inputs(self.local)
         self.generated = tuple(str(path) for path in native.FILES)
         for path in self.generated:
             target = self.local / path
@@ -272,13 +275,8 @@ class PublicationCLIBase(GitFixture):
             self.generated[1]: plistlib.dumps({source.SHORT: self.version}, fmt=plistlib.FMT_BINARY),
             self.generated[2]: source.text(self.local / source.LOCALIZED).encode("utf-16"),
             self.generated[-1]: b"fresh signature bytes",
-            "build/XCBuildData/build.db": b"fresh Xcode build database",
-            "build/XCBuildData/build.db-wal": b"fresh Xcode write-ahead log",
-            "build/XCBuildData/build.db-shm": b"fresh Xcode shared memory",
-            "build/XCBuildData/0123456789abcdef0123456789abcdef.xcbuilddata/build-request.json":
-                b"fresh Xcode request",
-            "build/Default/TZ.build/build.db": b"fresh intermediate",
         }
+        data.update({path: b"fresh hosted-path intermediate" for path in HOSTED_FILES})
         data.update({path: (self.local / Path(path).name).read_bytes()
                      for path in self.generated[3:-1]})
         data["winbuild/TZ.4DX"] = b"fresh windows artifact"
@@ -328,7 +326,7 @@ class PublicationCLITests(PublicationCLIBase):
     def test_actual_cli_ignored_xcode_database_retained_without_relaxing_source_guards(self):
         self.assertEqual(self.command("preflight").returncode, 0)
         self.reset_api()
-        relative = "build/XCBuildData/build.db"
+        relative = "TZ.4dbase/Plugins/XCBuildData/build.db"
         database = self.local / relative
         database.parent.mkdir(parents=True)
         database.write_bytes(b"stale initial database")
@@ -338,9 +336,10 @@ class PublicationCLITests(PublicationCLIBase):
         database.unlink()
 
         expected = self.build()
-        for path in ("build/unexpected-source.cpp", "build/XCBuildData/unexpected-source.cpp",
-                     "build/XCBuildData/build.db-evil",
-                     "build/XCBuildData/evil.xcbuilddata/build-request.json"):
+        for path in ("build/unexpected-source.cpp",
+                     "TZ.4dbase/Plugins/XCBuildData/unexpected-source.cpp",
+                     "TZ.4dbase/Plugins/XCBuildData/build.db-evil",
+                     "TZ.4dbase/Plugins/XCBuildData/evil.xcbuilddata/build-request.json"):
             unexpected = self.local / path
             unexpected.parent.mkdir(parents=True, exist_ok=True)
             unexpected.write_bytes(b"ignored source is not a generated database")
@@ -377,7 +376,7 @@ class PublicationCLITests(PublicationCLIBase):
                         self.git("update-index", "--" + stage, "--", path)
                     target.write_bytes(self.baseline[path] + b" altered")
                     if stage in ("staged", "reversed"):
-                        self.git("add", "--", path)
+                        self.git("add", "-f", "--", path)
                     if stage == "reversed":
                         target.write_bytes(self.baseline[path])
                     result = self.command("publish")
@@ -386,7 +385,7 @@ class PublicationCLITests(PublicationCLIBase):
                     if stage in ("assume-unchanged", "skip-worktree"):
                         self.git("update-index", "--no-" + stage, "--", path)
                     target.write_bytes(self.baseline[path])
-                    self.git("add", "--", path)
+                    self.git("add", "-f", "--", path)
 
     def test_head_source_version_wrong_repo_and_explicit_auth_fail_before_api(self):
         self.build()
@@ -432,7 +431,7 @@ class PublicationCLITests(PublicationCLIBase):
         self.assertEqual(self.calls(), [])
         target.unlink()
         target.write_bytes(fresh)
-        directory = self.local / "build/XCBuildData"
+        directory = self.local / "TZ.4dbase/Plugins/XCBuildData"
         (directory / "external-link").symlink_to(external)
         self.assertNotEqual(self.command("publish").returncode, 0)
         self.assertEqual(self.calls(), [])
@@ -526,15 +525,21 @@ class PublicationCLITests(PublicationCLIBase):
 
     def test_every_controlled_intermediate_is_allowed_but_siblings_are_not(self):
         self.build()
-        for directory in native.DIRECTORIES:
-            path = self.local / directory / "nested/generated"
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes(b"controlled output")
+        for directory in HOSTED["directory_roots"]:
+            (self.local / directory).mkdir(parents=True, exist_ok=True)
         result = self.command("check")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.reset_api()
-        for name in ("build/XCBuildData-evil/build.db",
-                     "build/Default/TZ.build-evil/injected",
+        for name in ("TZ.4dbase/Plugins/XCBuildData-evil/build.db",
+                     "TZ.4dbase/Plugins/TZ.build/Default-evil/injected",
+                     "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/unexpected-source.cpp",
+                     "TZ.4dbase/Plugins/SwiftExplicitPrecompiledModules/unexpected-source.cpp",
+                     "TZ.4dbase/Plugins/ExplicitPrecompiledModules/evil.pcm",
+                     "TZ.4dbase/Plugins/EagerLinkingTBDs/Default/evil.tbd",
+                     "TZ.4dbase/Plugins/SharedPrecompiledHeaders/unexpected-source.cpp",
+                     "build/Default/TZ.build/injected",
+                     "build/TZ.build/Default/TZ.build/Objects-normal/arm64/4DPlugin.o",
+                     "test/Plugins/TZ.build/injected",
                      "test/Plugins/Default/TZ.bundle/Contents/Info.plist"):
             target = self.local / name
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -542,6 +547,26 @@ class PublicationCLITests(PublicationCLIBase):
             self.assertNotEqual(self.command("check").returncode, 0)
             self.assertEqual(self.calls(), [])
             target.unlink()
+        retained = {path: (self.local / path).read_bytes() for path in HOSTED_FILES}
+        self.assertEqual(self.command("check").returncode, 0)
+        for path, raw in retained.items():
+            self.assertEqual((self.local / path).read_bytes(), raw)
+
+    def test_original_tracked_build_inputs_are_immutable_before_api(self):
+        paths = [path for path in self.protected if path.startswith("build/")]
+        self.assertEqual(len(paths), 8)
+        self.build()
+        for relative in paths:
+            with self.subTest(relative=relative):
+                path = self.local / relative
+                raw = path.read_bytes()
+                path.write_bytes(raw + b"late mutation")
+                self.assertNotEqual(self.command("check").returncode, 0)
+                self.assertEqual(self.calls(), [])
+                path.write_bytes(raw)
+        self.assertEqual(self.command("check").returncode, 0)
+        for relative in paths:
+            self.assertEqual((self.local / relative).read_bytes(), self.baseline[relative])
 
     def test_exact_asset_arguments_regular_nonempty_symlink_and_alias_rejection(self):
         self.build()

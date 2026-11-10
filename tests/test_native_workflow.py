@@ -11,7 +11,7 @@ import unittest
 
 import yaml
 
-from helper_support import Fixture, ROOT, original, source
+from helper_support import Fixture, HOSTED, HOSTED_FILES, ROOT, original, source
 import native
 
 
@@ -61,10 +61,12 @@ elif tool == "xcodebuild":
             pathlib.Path("English.lproj/InfoPlist.strings").read_text(encoding="utf-8-sig").encode("utf-16"))
         for resource in ("manifest.json", "constants.xlf"):
             shutil.copyfile(resource, contents / "Resources" / resource)
-        db = pathlib.Path("build/XCBuildData")
-        db.mkdir(parents=True, exist_ok=True)
-        for name in ("build.db", "build.db-wal", "build.db-shm"):
-            (db / name).write_bytes(b"fresh-database")
+        for name in json.loads(os.environ["HOSTED_DIRECTORIES"]):
+            pathlib.Path(name).mkdir(parents=True, exist_ok=True)
+        for name in json.loads(os.environ["HOSTED_FILES"]):
+            path = pathlib.Path(name)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(b"fresh-hosted-intermediate")
 elif tool == "lipo":
     print(os.environ.get("DYLIB_ARCHES" if args[-1].endswith(".dylib") else "ARCHES",
                          "arm64 x86_64"))
@@ -130,6 +132,8 @@ class NativeWorkflowTests(Fixture):
             "CERT_BASE64": "b2ZmbGluZQ==", "CERT_PASSWORD": "offline-only",
             "KEYCHAIN_PASSWORD": "offline-only", "APPLE_ID": "offline@example.invalid",
             "TEAM_ID": "OFFLINEONLY", "APP_PASSWORD": "offline-only",
+            "HOSTED_DIRECTORIES": json.dumps(HOSTED["directory_roots"]),
+            "HOSTED_FILES": json.dumps(HOSTED_FILES),
         }
         shutil.copytree(ROOT / ".github/scripts", self.checkout / ".github/scripts",
                         ignore=shutil.ignore_patterns("__pycache__"))
@@ -144,6 +148,9 @@ class NativeWorkflowTests(Fixture):
         self.jobs = yaml.safe_load(WORKFLOW.read_text())["jobs"]
         self.contents = self.checkout / CONTENTS
         self.protected = {}
+        for path in self.build_inputs(self.checkout):
+            target = self.checkout / path
+            self.protected[target] = target.read_bytes()
         for relative in ("MacOS/runtime.dylib", "QuickLook/Thumbnail.png",
                          "Windows/TZ.4DX",
                          "Resources/custom.txt"):
@@ -238,6 +245,33 @@ class NativeWorkflowTests(Fixture):
         path.mkdir()
         self.mac_step("build macOS plugin (universal)", success=False)
         self.assertFalse(any(call[0] == "xcodebuild" for call in self.calls()))
+
+    def test_late_cleanup_wrong_types_and_nested_git_never_delete_or_reach_xcode(self):
+        first = self.contents / "MacOS/TZ"
+        cases = (
+            (native.FILES[-1], "directory"),
+            (native.DIRECTORIES[-1], "file"),
+            (native.XCODE_DATA, "file"),
+            (native.DIRECTORIES[-1] / "nested/.git", "file"),
+            (native.DIRECTORIES[-1] / "nested/.git", "directory"),
+            (native.DIRECTORIES[0].parent / ".git", "file"),
+            (native.DIRECTORIES[0] / "unexpected-source.cpp", "file"),
+        )
+        for relative, kind in cases:
+            with self.subTest(relative=relative, kind=kind):
+                path = self.checkout / relative
+                if path.is_file():
+                    path.unlink()
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.mkdir() if kind == "directory" else path.write_bytes(b"protected")
+                self.mac_step("build macOS plugin (universal)", success=False)
+                self.assertEqual(first.read_bytes(), b"stale")
+                self.assertTrue(path.exists())
+                self.assertFalse(any(call[0] == "xcodebuild" for call in self.calls()))
+                shutil.rmtree(path) if path.is_dir() else path.unlink()
+        self.build()
+        for path, raw in self.protected.items():
+            self.assertEqual(path.read_bytes(), raw)
 
     def test_missing_empty_stale_binary_and_exact_architecture_tokens(self):
         self.env["STALE_BUILD"] = "1"

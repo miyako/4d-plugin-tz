@@ -13,8 +13,13 @@ function Assert-Safe([string]$path) {
     }
     $ancestor = $full
     while ($ancestor -and $ancestor -ne $root) {
-        if (Test-Path -LiteralPath $ancestor) {
-            $item = Get-Item -Force -LiteralPath $ancestor
+        $marker = Get-Item -Force -LiteralPath (Join-Path $ancestor ".git") -ErrorAction SilentlyContinue
+        if ([IO.Path]::GetFileName($ancestor) -eq ".git" -or
+            $null -ne $marker) {
+            throw "Nested Git output: $ancestor"
+        }
+        $item = Get-Item -Force -LiteralPath $ancestor -ErrorAction SilentlyContinue
+        if ($null -ne $item) {
             if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
                 throw "Symlink/reparse output: $ancestor"
             }

@@ -1,0 +1,36 @@
+{
+  "authority": {
+    "run": 36970267871,
+    "job": 110722782590,
+    "source_sha": "d87f18f63e30925c3fdc03c4b03efec6b71c59e7",
+    "artifact": "original-hosted-macos-build-step.txt",
+    "artifact_sha256": "c2ddccb6736b2c1a7e305eaed729b1b92d603068c565dc75b2a582bab7ff8ce4",
+    "project_setting": "Default SYMROOT=$(SRCROOT)/TZ.4dbase/Plugins; no Default OBJROOT override",
+    "note": "Observed hosted paths, not stub-derived authority. XCBuildData database/WAL/SHM and 32hex build-description descendants follow the separately required narrow database contract."
+  },
+  "directory_roots": [
+    "TZ.4dbase/Plugins/TZ.build/Default",
+    "TZ.4dbase/Plugins/SwiftExplicitPrecompiledModules",
+    "TZ.4dbase/Plugins/ExplicitPrecompiledModules",
+    "TZ.4dbase/Plugins/EagerLinkingTBDs/Default",
+    "TZ.4dbase/Plugins/SharedPrecompiledHeaders"
+  ],
+  "xcode_data_root": "TZ.4dbase/Plugins/XCBuildData",
+  "observed_files": [
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ-a14f374d69237e1b245913f7514d9b79-VFS/all-product-headers.yaml",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/TZ.hmap",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/TZ.DependencyMetadataFileList",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/TZ.DependencyStaticMetadataFileList",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/Objects-normal/arm64/4DPlugin.o",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/Objects-normal/x86_64/4DPlugin.dia",
+    "TZ.4dbase/Plugins/TZ.build/Default/TZ.build/Objects-normal/arm64/Binary/TZ",
+    "TZ.4dbase/Plugins/SharedPrecompiledHeaders/SharedPrecompiledHeaders/16786228708948577068/4D Plugin_Prefix.pch.gch",
+    "TZ.4dbase/Plugins/SharedPrecompiledHeaders/SharedPrecompiledHeaders/1765454319487730118/4D Plugin_Prefix.pch.d"
+  ],
+  "database_files": [
+    "TZ.4dbase/Plugins/XCBuildData/build.db",
+    "TZ.4dbase/Plugins/XCBuildData/build.db-wal",
+    "TZ.4dbase/Plugins/XCBuildData/build.db-shm",
+    "TZ.4dbase/Plugins/XCBuildData/f5f9cc94a5e6fff3f9379ac38c18e8df.xcbuilddata/build-request.json"
+  ]
+}

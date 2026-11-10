@@ -1,6 +1,7 @@
 """Isolated local-only fixtures shared by the helper regression suites."""
 
 import contextlib
+import json
 from functools import lru_cache
 import os
 from pathlib import Path
@@ -16,6 +17,9 @@ INTAKE = "d87f18f63e30925c3fdc03c4b03efec6b71c59e7"
 TRAILER = "Co-authored-by: Copilot App <223556219+Copilot@users.noreply.github.com>"
 sys.path.insert(0, str(ROOT / ".github/scripts"))
 import source_version as source
+
+HOSTED = json.loads((ROOT / "tests/fixtures/hosted-macos-intermediates.json").read_text())
+HOSTED_FILES = tuple(HOSTED["observed_files"] + HOSTED["database_files"])
 
 
 @contextlib.contextmanager
@@ -79,6 +83,20 @@ class Fixture(unittest.TestCase):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(original(path))
             target.chmod(0o755 if header.startswith("100755") else 0o644)
+
+    def build_inputs(self, destination):
+        records = subprocess.check_output(
+            ["git", "ls-tree", "-r", "-z", INTAKE, "--", "build"], cwd=ROOT
+        ).decode().strip("\0").split("\0")
+        paths = []
+        for record in records:
+            header, path = record.split("\t")
+            target = destination / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(original(path))
+            target.chmod(0o755 if header.startswith("100755") else 0o644)
+            paths.append(path)
+        return tuple(paths)
 
     def initialize_database_git(self, destination):
         self.database_source(destination)

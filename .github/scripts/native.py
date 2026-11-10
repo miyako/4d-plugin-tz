@@ -24,9 +24,25 @@ DOWNLOADS = (Path("winbuild/TZ.4DX"),)
 WINDOWS_SOURCE = Path("TZ.4dbase/plugins/TZ.bundle/contents/windows64/TZ.4DX")
 TZ_SOURCE = Path("TZ.4dbase/Plugins/TZ.bundle/Contents/Resources/tzdata")
 TZ_DEST = BUNDLE / "Contents/Resources/tzdata"
-XCODE_DATA = Path("build/XCBuildData")
-DIRECTORIES = (Path("build/TZ.build"), Path("build/Default/TZ.build"),
-               BASE / "TZ.build")
+INTERMEDIATES = Path("TZ.4dbase/Plugins")
+XCODE_DATA = INTERMEDIATES / "XCBuildData"
+DIRECTORIES = tuple(INTERMEDIATES / path for path in (
+    "TZ.build/Default", "SwiftExplicitPrecompiledModules", "ExplicitPrecompiledModules",
+    "EagerLinkingTBDs/Default", "SharedPrecompiledHeaders",
+))
+UNIT = (r"(?:4DPlugin(?:API)?|ARRAY_(?:BOOLEAN|DATE|INTEGER|LONGINT|REAL|TEXT|TIME)|"
+        r"C_(?:BLOB|DATE|INTEGER|LONGINT|PICTURE|POINTER|REAL|TEXT|TIME))")
+INTERMEDIATE_FILE = re.compile(
+    re.escape(str(INTERMEDIATES)) + r"/(?:"
+    r"TZ\.build/Default/(?:TZ-[0-9a-f]{32}-VFS/all-product-headers\.yaml|TZ\.build/(?:"
+    r"TZ(?:-(?:all-non-framework-target-headers|all-target-headers|generated-files|"
+    r"own-target-headers|project-headers))?\.hmap|"
+    r"TZ\.Dependency(?:Static)?MetadataFileList|"
+    r"Objects-normal/(?:arm64|x86_64)/(?:" + UNIT + r"\.(?:o|d|dia)|"
+    r"[0-9a-f]{32}-common-args\.resp|TZ\.LinkFileList|TZ_dependency_info\.dat|Binary/TZ)))|"
+    r"SharedPrecompiledHeaders/SharedPrecompiledHeaders/[0-9]+/"
+    r"4D Plugin_Prefix\.pch\.(?:gch|d|dia))\Z"
+)
 
 
 @lru_cache(maxsize=32)
@@ -48,9 +64,10 @@ def generated(path, *, database_paths=None):
             database() if database_paths is None else database_paths)
     return (path in set(map(str, (*FILES, WINDOWS_BINARY, *DOWNLOADS)))
             or bool(re.fullmatch(
-                r"build/XCBuildData/(?:build\.db(?:-wal|-shm)?|"
-                r"[0-9a-f]{32}\.xcbuilddata/.+)", path))
-            or any(path.startswith(str(directory) + "/") for directory in DIRECTORIES))
+                re.escape(str(XCODE_DATA)) + r"/(?:build\.db(?:-wal|-shm)?|"
+                r"[0-9a-f]{32}\.xcbuilddata/.+)", path)
+                and not re.search(r"\.(?:c|cc|cpp|h|hpp|m|mm|swift)$", path))
+            or bool(INTERMEDIATE_FILE.fullmatch(path)))
 
 
 def validate_paths(paths):
@@ -61,11 +78,16 @@ def validate_paths(paths):
                 break
             if repository.is_link(parent):
                 raise ValueError(f"Refusing symlink/reparse output: {parent}")
+            if parent.name == ".git" or (parent.is_dir() and (
+                    (parent / ".git").exists() or repository.is_link(parent / ".git"))):
+                raise ValueError(f"Refusing nested Git output: {parent}")
         if not path.resolve().is_relative_to(root):
             raise ValueError(f"Output escapes checkout: {path}")
         if path.exists():
             paths_to_check = (path, *path.rglob("*")) if path.is_dir() else (path,)
             for descendant in paths_to_check:
+                if descendant.name == ".git":
+                    raise ValueError(f"Refusing nested Git output: {descendant}")
                 if repository.is_link(descendant):
                     raise ValueError(f"Refusing symlink/reparse output: {descendant}")
                 if not (descendant.is_file() or descendant.is_dir()):
@@ -120,6 +142,11 @@ def prepare():
     for path in (*DIRECTORIES, XCODE_DATA):
         if path.exists() and not path.is_dir():
             raise ValueError(f"Expected cleanup directory: {path}")
+    for directory in DIRECTORIES:
+        if directory.is_dir():
+            for path in directory.rglob("*"):
+                if path.is_file() and not generated(str(path)):
+                    raise ValueError(f"Unexpected cleanup intermediate: {path}")
     for path in FILES:
         path.unlink(missing_ok=True)
     for path in DIRECTORIES:

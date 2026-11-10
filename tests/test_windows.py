@@ -106,6 +106,33 @@ class WindowsScriptTests(Fixture):
         release.symlink_to(outside, target_is_directory=True)
         self.phase("clean stale outputs", success=False)
         self.assertEqual(source.read_bytes(), b"must remain")
+        release.unlink()
+        for relative, kind in (
+            ("Objs/Release", "file"),
+            ("Objs/Release/nested/.git", "file"),
+            ("Objs/Release/nested/.git", "directory"),
+            ("Objs/.git", "file"),
+            ("test/Plugins/.git", "file"),
+            ("test/Plugins/.git", "symlink"),
+            (str(native.WINDOWS_BINARY), "symlink"),
+        ):
+            with self.subTest(relative=relative, kind=kind):
+                path = self.checkout / relative
+                if path.is_dir():
+                    shutil.rmtree(path)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                if kind == "directory":
+                    path.mkdir()
+                elif kind == "symlink":
+                    path.symlink_to(self.root / "missing-link-target")
+                else:
+                    path.write_bytes(b"protected")
+                self.phase("clean stale outputs", success=False)
+                self.assertEqual(source.read_bytes(), b"must remain")
+                self.assertTrue(path.exists() or path.is_symlink())
+                shutil.rmtree(path) if path.is_dir() else path.unlink()
+        self.phase("clean stale outputs")
+        self.assertFalse(source.exists())
 
     def test_original_cmd_and_project_output_contract_static_only(self):
         before = yaml.safe_load(original(".github/workflows/release.yml"))
