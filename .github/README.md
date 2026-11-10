@@ -128,6 +128,13 @@ actual Bash/PowerShell extracted workflow programs. No real native build,
 signing, notarization, 4D, production push/tag/release, Actions dispatch or secrets
 are used. CMD is preserved and static-tested, not emulated. PowerShell, PyYAML,
 and actionlint must already be available; tests have no skip path.
+An actual local clone/checkout regression starts with hostile `autocrlf=true`
+in a fixture-only HOME/global file, inherits the workflow's scoped false setting
+before clone and detached checkout, and independently checks every raw blob and
+index entry. A late-setting negative control retains converted bytes and fails
+before API access. The cloned checkout also exercises Windows-only executable
+mode tolerance and raw/index/type/reparse failures, then restores a passing
+preflight without changing the fixture global file or any host/global config.
 
 Adapted immutable donor code/tests were actually read and raw-blob verified:
 UTI `5decf4be07f8297d256dfb559ef9466525fe9045` (source model, workflow/native

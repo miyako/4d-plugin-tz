@@ -1,5 +1,6 @@
 """Real CLI negatives must precede every API call, followed by restored positives."""
 
+import hashlib
 import shutil
 import subprocess
 import sys
@@ -185,6 +186,143 @@ runpy.run_path(sys.argv[0], run_name="__main__")
     def windows(self, **env):
         return subprocess.run([sys.executable, str(self.bootstrap)], cwd=self.local,
                               env={**self.env, **env}, text=True, capture_output=True, timeout=60)
+
+    def test_actual_clone_inherits_autocrlf_false_before_checkout_despite_hostile_isolated_global(self):
+        self.setup_windows()
+        committed = {
+            "native.cpp": b"// executable source\nint fixture = 1;\n",
+            "endings/lf.cpp": b"// LF source\nint lf = 1;\n",
+            "endings/crlf.cpp": b"// CRLF source\r\nint crlf = 1;\r\n",
+            "endings/mixed.cpp": b"// mixed source\rint mixed = 1;\n// end\r\n",
+        }
+        for name, raw in committed.items():
+            path = self.local / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(raw)
+        self.git("add", "--", *committed)
+        self.git("update-index", "--chmod=+x", "--", "native.cpp")
+        self.git("commit", "--quiet", "-m", "committed line endings and executable clone inputs")
+        self.sha = self.git("rev-parse", "HEAD")
+        self.git("--git-dir=" + str(self.bare), "fetch", "--quiet", "--no-tags",
+                 str(self.local), self.sha)
+        self.git("--git-dir=" + str(self.bare), "update-ref", self.ref, self.sha)
+
+        global_config = self.home / ".gitconfig"
+        global_bytes = b"[core]\n\tautocrlf = true\n"
+        global_config.write_bytes(global_bytes)
+        hostile = {**self.env, "GIT_CONFIG_GLOBAL": str(global_config), "GITHUB_SHA": self.sha}
+        workflow = yaml.safe_load((ROOT / ".github/workflows/release.yml").read_text())
+        inherited = {key: value for key, value in workflow["env"].items()
+                     if key.startswith("GIT_CONFIG_")}
+        self.assertEqual(inherited, {
+            "GIT_CONFIG_COUNT": "1", "GIT_CONFIG_KEY_0": "core.autocrlf",
+            "GIT_CONFIG_VALUE_0": "false",
+        })
+        scoped = {**hostile, **inherited}
+
+        def clone_git(*args, env, cwd=self.root, check=True):
+            return subprocess.run(["git", *map(str, args)], cwd=cwd, env=env,
+                                  capture_output=True, check=check, timeout=60)
+
+        self.assertEqual(clone_git("config", "--global", "--get", "core.autocrlf",
+                                   env=hostile).stdout, b"true\n")
+        late = self.root / "configured-too-late"
+        clone_git("clone", "--quiet", "--no-local", "--no-tags", "--branch", "selected",
+                  self.bare, late, env=hostile)
+        self.assertEqual((late / "endings/lf.cpp").read_bytes(),
+                         committed["endings/lf.cpp"].replace(b"\n", b"\r\n"))
+        self.assertNotEqual((late / "native.cpp").read_bytes(), committed["native.cpp"])
+        self.local, self.env = late, scoped
+        self.assertEqual(self.git("config", "--get", "core.autocrlf"), "false")
+        result = self.windows()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Working source/config differs", result.stderr)
+        self.assertEqual(self.calls(), [], "Applying the setting after checkout must not pass")
+
+        cloned = self.root / "inherited-before-clone"
+        clone_git("clone", "--quiet", "--no-local", "--no-tags", "--no-checkout",
+                  "--branch", "selected", self.bare, cloned, env=scoped)
+        clone_git("checkout", "--quiet", "--detach", self.sha, cwd=cloned, env=scoped)
+        self.local = cloned
+        self.assertEqual(self.git("rev-parse", "HEAD"), self.sha)
+        self.assertNotEqual(self.git("symbolic-ref", "-q", "HEAD", check=False).returncode, 0)
+        self.assertEqual(self.git("config", "--get", "core.autocrlf"), "false")
+        self.assertNotEqual(self.git("config", "--local", "--get",
+                                     "core.autocrlf", check=False).returncode, 0)
+        selected = {}
+        for record in self.git("ls-tree", "-r", "-z", self.sha).strip("\0").split("\0"):
+            header, name = record.split("\t")
+            mode, kind, oid = header.split()
+            self.assertEqual(kind, "blob")
+            raw = (cloned / name).read_bytes()
+            self.assertEqual(hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest(),
+                             oid, name)
+            selected[name] = (mode, oid)
+        indexed = {}
+        for record in self.git("ls-files", "--stage", "-z").strip("\0").split("\0"):
+            header, name = record.split("\t")
+            mode, oid, stage = header.split()
+            self.assertEqual(stage, "0")
+            indexed[name] = (mode, oid)
+        self.assertEqual(indexed, selected)
+        self.assertEqual(selected["native.cpp"][0], "100755")
+        for name, raw in committed.items():
+            self.assertEqual((cloned / name).read_bytes(), raw)
+
+        self.git("config", "core.filemode", "false")
+        for name in selected:
+            (cloned / name).chmod(0o644)
+        result = self.windows()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.reset_api()
+        self.assertNotEqual(self.windows(TEST_PLATFORM="darwin").returncode, 0)
+        self.assertEqual(self.calls(), [])
+        target = cloned / "native.cpp"
+        raw = committed["native.cpp"]
+        for mutation in ("raw", "staged", "reversed", "indexmode"):
+            with self.subTest(cloned_mutation=mutation):
+                target.write_bytes(raw + b"bad\n")
+                if mutation in ("staged", "reversed"):
+                    self.git("add", "--", "native.cpp")
+                if mutation in ("reversed", "indexmode"):
+                    target.write_bytes(raw)
+                if mutation == "indexmode":
+                    self.git("update-index", "--chmod=-x", "--", "native.cpp")
+                self.assertNotEqual(self.windows().returncode, 0)
+                self.assertEqual(self.calls(), [])
+                self.git("restore", "--staged", "--", "native.cpp")
+                target.write_bytes(raw)
+                target.chmod(0o644)
+        outside = self.root / "same-cloned-source-bytes"
+        outside.write_bytes(raw)
+        for kind in ("symlink", "directory"):
+            with self.subTest(cloned_type=kind):
+                target.unlink()
+                if kind == "symlink":
+                    target.symlink_to(outside)
+                else:
+                    target.mkdir()
+                self.assertNotEqual(self.windows().returncode, 0)
+                self.assertEqual(self.calls(), [])
+                if kind == "directory":
+                    target.rmdir()
+                else:
+                    target.unlink()
+                target.write_bytes(raw)
+        for marker in ("native.cpp", "."):
+            self.assertNotEqual(self.windows(TEST_REPARSE=marker).returncode, 0)
+            self.assertEqual(self.calls(), [])
+        result = self.windows()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.git("status", "--porcelain"), "")
+        self.assertEqual(self.git("diff", "--cached", "--name-only", self.sha), "")
+        for name, expected in selected.items():
+            raw = (cloned / name).read_bytes()
+            self.assertEqual(hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest(),
+                             expected[1], name)
+        self.assertEqual(global_config.read_bytes(), global_bytes)
+        self.assertEqual(clone_git("config", "--global", "--get", "core.autocrlf",
+                                   env=hostile).stdout, b"true\n")
 
     def test_win32_only_raw_equal_regular_executable_mode_tolerance(self):
         self.setup_windows()
