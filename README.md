@@ -9,6 +9,11 @@ The TZ plugin parses, reformats, and converts date/time strings between IANA tim
 
 **Platforms:** macOS and Windows (4D has no Linux runtime; there's no gap to work around here).
 
+**Maintainers:** source-only **Bump version** and independent zero-input manual
+**Build** are documented in [the workflow guide](.github/README.md), including
+immutable-source validation, the approved timezone-data packaging repair, and
+create-only release recovery.
+
 ---
 
 ## Requirements & platform notes
@@ -199,4 +204,3 @@ $result:=TZ Convert($date_string; "%F %T %z"; ""; "")
 // Full zone database as JSON
 $zones_json:=TZ Get zones
 ```
-
