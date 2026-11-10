@@ -79,7 +79,8 @@ permission for downloads, database refreshes, runtime changes, or broad copying.
 Cleanup prevalidates every affected file/directory type, descendant, symlink,
 reparse point and nested Git marker before the first deletion. It deletes only
 generated leaves and exact intermediate roots, never entire bundles, `Default`
-packages, lowercase plugin directories, or `build/`.
+packages, lowercase plugin directories, or `build/`. Windows path probes tolerate
+only a missing item; permission and other filesystem errors stop before deletion.
 
 The original successful macOS BUILD step (run `36970267871`, job
 `110722782590`, intake `d87f18f`) and Default's original project settings establish

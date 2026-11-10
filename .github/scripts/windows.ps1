@@ -6,6 +6,14 @@ $source = "TZ.4dbase/plugins/TZ.bundle/contents/windows64/TZ.4DX"
 $destination = "test/Plugins/TZ.bundle/Contents/Windows64/TZ.4DX"
 $root = [IO.Path]::GetFullPath((Get-Location).Path)
 
+function Get-OptionalItem([string]$path) {
+    try {
+        Get-Item -Force -LiteralPath $path -ErrorAction Stop
+    } catch [System.Management.Automation.ItemNotFoundException] {
+        return $null
+    }
+}
+
 function Assert-Safe([string]$path) {
     $full = [IO.Path]::GetFullPath((Join-Path $root $path))
     if (-not $full.StartsWith($root + [IO.Path]::DirectorySeparatorChar, [StringComparison]::Ordinal)) {
@@ -13,12 +21,12 @@ function Assert-Safe([string]$path) {
     }
     $ancestor = $full
     while ($ancestor -and $ancestor -ne $root) {
-        $marker = Get-Item -Force -LiteralPath (Join-Path $ancestor ".git") -ErrorAction SilentlyContinue
+        $marker = Get-OptionalItem (Join-Path $ancestor ".git")
         if ([IO.Path]::GetFileName($ancestor) -eq ".git" -or
             $null -ne $marker) {
             throw "Nested Git output: $ancestor"
         }
-        $item = Get-Item -Force -LiteralPath $ancestor -ErrorAction SilentlyContinue
+        $item = Get-OptionalItem $ancestor
         if ($null -ne $item) {
             if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
                 throw "Symlink/reparse output: $ancestor"

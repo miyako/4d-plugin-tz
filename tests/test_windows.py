@@ -154,3 +154,30 @@ class WindowsScriptTests(Fixture):
             "GIT_CONFIG_VALUE_0": "false",
         })
         self.assertNotIn("--global", (ROOT / ".github/workflows/release.yml").read_text())
+
+    def test_inaccessible_later_cleanup_probe_is_fatal_before_first_delete(self):
+        source = self.put(native.WINDOWS_SOURCE, b"must remain")
+        destination = self.put(native.WINDOWS_BINARY, b"must also remain")
+        command = r'''
+function Get-Item {
+    [CmdletBinding()]
+    param([string]$LiteralPath, [switch]$Force)
+    if ($LiteralPath -eq (Join-Path (Get-Location).Path "test/Plugins/.git")) {
+        $record = [System.Management.Automation.ErrorRecord]::new(
+            [UnauthorizedAccessException]::new("offline permission denied"),
+            "FixtureDenied", [System.Management.Automation.ErrorCategory]::PermissionDenied,
+            $LiteralPath)
+        $PSCmdlet.WriteError($record)
+        return
+    }
+    Microsoft.PowerShell.Management\Get-Item @PSBoundParameters
+}
+.github/scripts/windows.ps1 clean
+'''
+        result = subprocess.run(
+            [self.pwsh, "-NoLogo", "-NoProfile", "-NonInteractive", "-Command", command],
+            cwd=self.checkout, env=self.env, text=True, capture_output=True, timeout=30)
+        self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("offline permission denied", result.stderr)
+        self.assertEqual(source.read_bytes(), b"must remain")
+        self.assertEqual(destination.read_bytes(), b"must also remain")
